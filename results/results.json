@@ -1,0 +1,370 @@
+{
+  "culprit": {
+    "commits_in_range": 128,
+    "pass_rate_when_healthy": 0.95,
+    "posterior_median_bayesian_at_64_commits": {
+      "accuracy": 0.6833,
+      "mean_test_runs": 400.0
+    },
+    "rows": [
+      {
+        "pass_rate_when_broken": 0.0,
+        "strategies": {
+          "naive_bisect": {
+            "accuracy": 0.815,
+            "mean_test_runs": 7.0,
+            "median_distance": 0,
+            "p95_distance": 10,
+            "within_one_commit": 0.86
+          },
+          "repeated_bisect": {
+            "accuracy": 1.0,
+            "mean_test_runs": 35.0,
+            "median_distance": 0,
+            "p95_distance": 0,
+            "within_one_commit": 1.0
+          },
+          "sprt_bisect": {
+            "accuracy": 0.995,
+            "mean_test_runs": 10.91,
+            "median_distance": 0,
+            "p95_distance": 0,
+            "within_one_commit": 0.995
+          }
+        }
+      },
+      {
+        "pass_rate_when_broken": 0.1,
+        "strategies": {
+          "naive_bisect": {
+            "accuracy": 0.57,
+            "mean_test_runs": 7.0,
+            "median_distance": 0,
+            "p95_distance": 39,
+            "within_one_commit": 0.665
+          },
+          "repeated_bisect": {
+            "accuracy": 0.955,
+            "mean_test_runs": 35.0,
+            "median_distance": 0,
+            "p95_distance": 0,
+            "within_one_commit": 0.97
+          },
+          "sprt_bisect": {
+            "accuracy": 0.98,
+            "mean_test_runs": 20.43,
+            "median_distance": 0,
+            "p95_distance": 0,
+            "within_one_commit": 0.98
+          }
+        }
+      },
+      {
+        "pass_rate_when_broken": 0.3,
+        "strategies": {
+          "naive_bisect": {
+            "accuracy": 0.3,
+            "mean_test_runs": 7.0,
+            "median_distance": 3,
+            "p95_distance": 58,
+            "within_one_commit": 0.395
+          },
+          "repeated_bisect": {
+            "accuracy": 0.49,
+            "mean_test_runs": 35.0,
+            "median_distance": 1,
+            "p95_distance": 56,
+            "within_one_commit": 0.56
+          },
+          "sprt_bisect": {
+            "accuracy": 0.965,
+            "mean_test_runs": 30.25,
+            "median_distance": 0,
+            "p95_distance": 0,
+            "within_one_commit": 0.98
+          }
+        }
+      },
+      {
+        "pass_rate_when_broken": 0.5,
+        "strategies": {
+          "naive_bisect": {
+            "accuracy": 0.115,
+            "mean_test_runs": 7.0,
+            "median_distance": 16,
+            "p95_distance": 83,
+            "within_one_commit": 0.18
+          },
+          "repeated_bisect": {
+            "accuracy": 0.13,
+            "mean_test_runs": 35.0,
+            "median_distance": 16,
+            "p95_distance": 89,
+            "within_one_commit": 0.195
+          },
+          "sprt_bisect": {
+            "accuracy": 0.945,
+            "mean_test_runs": 58.16,
+            "median_distance": 0,
+            "p95_distance": 1,
+            "within_one_commit": 0.97
+          }
+        }
+      }
+    ],
+    "seed": 205,
+    "sprt_at_64_commits": {
+      "accuracy": 0.95,
+      "mean_test_runs": 27.43
+    },
+    "trials_per_cell": 200
+  },
+  "qualification": {
+    "consecutive_passes_needed_for_lower_bound": {
+      "0.80": 16,
+      "0.90": 35,
+      "0.95": 73,
+      "0.99": 381
+    },
+    "gate_after_the_broken_test_is_fixed": {
+      "qualified": true,
+      "quarantined": [
+        "flappy_a",
+        "flappy_b"
+      ],
+      "wilson_lower": 0.9874
+    },
+    "gate_with_a_consistently_failing_test": {
+      "qualified": false,
+      "quarantined": [
+        "flappy_a",
+        "flappy_b"
+      ],
+      "raw_pass_rate": 0.9967,
+      "reasons": [
+        "1 consistently failing tests: always_broken"
+      ],
+      "wilson_lower": 0.9814
+    },
+    "gate_with_unschedulable_cases": {
+      "qualified": false,
+      "reasons": [
+        "4 cases had no capable bench"
+      ]
+    },
+    "same_94_percent_rate_different_evidence": {
+      "4700_of_5000": 0.9331,
+      "470_of_500": 0.9156,
+      "47_of_50": 0.8378
+    },
+    "seed": 207
+  },
+  "scheduler": {
+    "benches": 8,
+    "best_over_lower_bound": 1.0002,
+    "best_policy": "lpt",
+    "cases": 600,
+    "cases_a_simulation_only_fleet_could_not_host": 259,
+    "lower_bound": 3206.93,
+    "policies": {
+      "constrained": {
+        "makespan": 3208.33,
+        "priority_inversions": 65,
+        "skipped": 0,
+        "utilization": 0.6778
+      },
+      "greedy": {
+        "makespan": 3214.57,
+        "priority_inversions": 80,
+        "skipped": 0,
+        "utilization": 0.6764
+      },
+      "lpt": {
+        "makespan": 3207.46,
+        "priority_inversions": 498,
+        "skipped": 0,
+        "utilization": 0.6779
+      }
+    },
+    "schedule_seconds_for_three_policies": 0.039,
+    "seconds_of_work_per_eligible_bench": {
+      "brake_actuator": 595.6,
+      "camera": 1435.9,
+      "compute_rev_b": 411.1,
+      "compute_rev_c": 2317.6,
+      "lidar": 619.0,
+      "radar": 947.0,
+      "simulation": 3206.9
+    },
+    "seed": 201,
+    "vs_brute_force_optimal": {
+      "graham_bound_for_3_machines": 1.6667,
+      "instances_solved": 60,
+      "mean_ratio": 1.0858,
+      "worst_ratio": 1.4546
+    }
+  },
+  "triage": {
+    "best": {
+      "f1": 0.877,
+      "mean_clusters": 23.2,
+      "precision": 0.9412,
+      "recall": 0.8327,
+      "require_support": true,
+      "threshold": 0.45
+    },
+    "bridging_blob": {
+      "require_support_False": {
+        "biggest_cluster_size": 133,
+        "edges_above_threshold": 1828,
+        "edges_refused": 0,
+        "refused_share": 0.0,
+        "root_causes_inside_it": 4
+      },
+      "require_support_True": {
+        "biggest_cluster_size": 42,
+        "edges_above_threshold": 1828,
+        "edges_refused": 18,
+        "refused_share": 0.0098,
+        "root_causes_inside_it": 2
+      }
+    },
+    "grid": [
+      {
+        "f1": 0.3762,
+        "mean_clusters": 6.6,
+        "precision": 0.2366,
+        "recall": 0.9523,
+        "require_support": false,
+        "threshold": 0.35
+      },
+      {
+        "f1": 0.5976,
+        "mean_clusters": 10.2,
+        "precision": 0.4654,
+        "recall": 0.9239,
+        "require_support": false,
+        "threshold": 0.4
+      },
+      {
+        "f1": 0.7064,
+        "mean_clusters": 14.2,
+        "precision": 0.6046,
+        "recall": 0.8969,
+        "require_support": false,
+        "threshold": 0.45
+      },
+      {
+        "f1": 0.8727,
+        "mean_clusters": 19.2,
+        "precision": 0.9038,
+        "recall": 0.8525,
+        "require_support": false,
+        "threshold": 0.5
+      },
+      {
+        "f1": 0.8596,
+        "mean_clusters": 28.2,
+        "precision": 0.9967,
+        "recall": 0.7567,
+        "require_support": false,
+        "threshold": 0.55
+      },
+      {
+        "f1": 0.7558,
+        "mean_clusters": 42.6,
+        "precision": 0.9998,
+        "recall": 0.6084,
+        "require_support": false,
+        "threshold": 0.6
+      },
+      {
+        "f1": 0.4388,
+        "mean_clusters": 86.2,
+        "precision": 0.9998,
+        "recall": 0.2824,
+        "require_support": false,
+        "threshold": 0.7
+      },
+      {
+        "f1": 0.6728,
+        "mean_clusters": 14.4,
+        "precision": 0.5719,
+        "recall": 0.8958,
+        "require_support": true,
+        "threshold": 0.35
+      },
+      {
+        "f1": 0.8482,
+        "mean_clusters": 18.4,
+        "precision": 0.8419,
+        "recall": 0.8659,
+        "require_support": true,
+        "threshold": 0.4
+      },
+      {
+        "f1": 0.877,
+        "mean_clusters": 23.2,
+        "precision": 0.9412,
+        "recall": 0.8327,
+        "require_support": true,
+        "threshold": 0.45
+      },
+      {
+        "f1": 0.8611,
+        "mean_clusters": 31.8,
+        "precision": 0.9967,
+        "recall": 0.7585,
+        "require_support": true,
+        "threshold": 0.5
+      },
+      {
+        "f1": 0.78,
+        "mean_clusters": 44.4,
+        "precision": 0.9965,
+        "recall": 0.6413,
+        "require_support": true,
+        "threshold": 0.55
+      },
+      {
+        "f1": 0.6689,
+        "mean_clusters": 62.2,
+        "precision": 1.0,
+        "recall": 0.5032,
+        "require_support": true,
+        "threshold": 0.6
+      },
+      {
+        "f1": 0.3924,
+        "mean_clusters": 103.2,
+        "precision": 1.0,
+        "recall": 0.2451,
+        "require_support": true,
+        "threshold": 0.7
+      }
+    ],
+    "logs_per_seed": 200,
+    "lsh_cost": {
+      "fraction_of_pairs_examined": 0.115,
+      "logs": 400,
+      "pairs_compared_exhaustive": 79800,
+      "pairs_compared_with_lsh": 9180,
+      "possible_pairs": 79800,
+      "seconds_exhaustive": 1.45,
+      "seconds_lsh": 1.35
+    },
+    "lsh_threshold_for_32_bands_of_4": 0.4204,
+    "normalisation_ablation_f1": {
+      "normalised": 0.877,
+      "raw_logs": 0.0028
+    },
+    "seed": 203,
+    "seeds": [
+      13,
+      17,
+      23,
+      29,
+      31
+    ]
+  }
+}
