@@ -12,7 +12,7 @@ silently searches the wrong half. Clustering welds two different bugs into one
 group and still reports a plausible cluster count. Each of those is measured
 here rather than asserted.
 
-## Layout
+## Package contents
 
 ```
 pitwall/spec.py           declare a suite, validate it, expand the matrix
@@ -65,7 +65,7 @@ tests somebody is waiting on. The default keeps priority bands intact and
 sorts longest first inside them.
 
 Against brute force optimal on 60 small instances the heuristic averages
-**1.086x optimal with a worst case of 1.455x**, comfortably inside the
+1.086x optimal with a worst case of 1.455x, comfortably inside the
 2 - 1/m = 1.667 list scheduling factor, though that bound is for identical
 machines and does not formally cover this case.
 
@@ -94,14 +94,14 @@ to a fixed size signature, LSH banding to avoid comparing everything to
 everything, then union find over surviving pairs.
 
 **Normalisation is the whole thing.** With it, pairwise F1 over 5 seeds of 200
-logs is **0.877**. Without it, **0.003**. Raw logs from one root cause are
+logs is 0.877. Without it, **0.003**. Raw logs from one root cause are
 never byte identical, so every log becomes its own cluster and the pipeline
 produces exactly as much value as not running it.
 
 MinHash is checked against the identity it depends on: the probability two
 signatures agree at a position equals the Jaccard similarity of the underlying
 sets. Over 25 random set pairs at 256 permutations the estimate tracks true
-Jaccard within **0.08**.
+Jaccard within 0.08.
 
 ### The bug that does not look like a bug
 
@@ -130,7 +130,7 @@ is the parameter nobody will ever retune:
 | --- | --- | --- | --- | --- |
 | 0.35 | 0.376 | 0.673 | 0.237 | 0.572 |
 | 0.40 | 0.598 | 0.848 | 0.465 | 0.842 |
-| 0.45 | 0.706 | **0.877** | 0.605 | 0.941 |
+| 0.45 | 0.706 | 0.877 | 0.605 | 0.941 |
 | 0.50 | 0.873 | 0.861 | 0.904 | 0.997 |
 | 0.55 | 0.860 | 0.780 | 0.997 | 0.997 |
 | 0.60 | 0.756 | 0.669 | 1.000 | 1.000 |
@@ -144,12 +144,12 @@ point than the 0.45 row that maximises F1.
 
 ### An optimisation that does not pay yet
 
-LSH banding examines **9,180 of 79,800 possible pairs at 400 logs, 11.5%**, and
+LSH banding examines 9,180 of 79,800 possible pairs at 400 logs, 11.5%, and
 saves almost no wall clock: 1.35 seconds against 1.45 seconds exhaustive.
 Signature construction dominates, not pair comparison, so the asymptotic win is
 real and the constant is not there yet at this size. Worth keeping because the
 corpus this exists for is thousands of logs, not four hundred, but worth
-labelling honestly rather than presenting an 8.7x pair reduction as an 8.7x
+labelling as such rather than presenting an 8.7x pair reduction as an 8.7x
 speedup.
 
 ## Finding the bad commit
@@ -184,7 +184,7 @@ and one false failure on the good side is just as fatal.
 I also built the version I thought would be cleverest first: keep a full
 posterior over which commit is the culprit and probe at the posterior median
 after every single run. At 64 commits it reaches **0.683 accuracy using 400
-test runs**, against SPRT's **0.950 using 27.4**. Moving the probe after one
+test runs, against SPRT's 0.950 using 27.4**. Moving the probe after one
 observation throws away the value of that observation, since one sample barely
 moves the posterior and the next probe is usually the same place, just reached
 more expensively. It is still in the repo because being able to point at the
@@ -201,7 +201,7 @@ proof with no way back.
 
 Two things this refuses to do.
 
-**It will not gate on a raw pass rate.** 47 of 50 is 94% and so is 4700 of
+It will not gate on a raw pass rate. 47 of 50 is 94% and so is 4700 of
 5000, and they are not the same evidence:
 
 ```
@@ -212,10 +212,10 @@ Two things this refuses to do.
 
 The gate uses the lower bound, so a build that has barely been tested cannot
 pass by being lucky. That also makes the cost of a strict bar explicit: a 0.95
-lower bound needs **73 consecutive passes**, and a 0.99 bound needs **381**. If
+lower bound needs 73 consecutive passes, and a 0.99 bound needs 381. If
 the fleet cannot supply that many runs, the gate is decoration.
 
-**It will not quarantine a test just because it fails a lot.** A test that
+It will not quarantine a test just because it fails a lot. A test that
 fails every single time is not flaky, it is a regression, and quarantining it
 is exactly how a real bug ships. Quarantine requires the test to have shown
 both outcomes. In the worked example, two flaky tests are quarantined and the
@@ -224,9 +224,9 @@ would have sailed through a percentage gate.
 
 Unschedulable cases block outright, for the same reason.
 
-## Verification
+## Testing
 
-`python -m pitwall.test_pitwall`: **22 cases, 425 assertions, 0 failures, 3.0s.**
+`python -m pitwall.test_pitwall`: 22 cases, 425 assertions, 0 failures, 3.0s.
 
 Checked against something external wherever one exists: brute force optimal
 makespan for the scheduler, a published worked Wilson interval (9 of 10 giving
@@ -234,7 +234,7 @@ makespan for the scheduler, a published worked Wilson interval (9 of 10 giving
 for both clustering and culprit finding. The validation tests assert on the
 specific silent failures rather than just that validation returns something.
 
-## What I left out
+## What's missing
 
 - Benches never fail. Real bench flakiness, where the machine rather than the
   test is the problem, is its own triage category and needs a bench health
